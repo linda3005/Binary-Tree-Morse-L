@@ -4,7 +4,7 @@
 int main(int argc, char const *argv[]){
     Tree morse = createTree();
     char temp[150], src[150], dest[150];
-    createMorseTree(&morse);
+    buildTmorse(&morse);
 
     printf("Tree Preorder : ");
     preorder(morse.root);
@@ -27,7 +27,7 @@ int main(int argc, char const *argv[]){
         printf("Input the morse code divided by space, max 150 char : ");
         scanf(" %[^\n]", temp);
 
-        convertMorseString(morse, temp);
+        conMorseStrg(morse, temp);
         break;
 
     case 3:

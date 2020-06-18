@@ -40,48 +40,6 @@ void insertSon(addressNode node, char pos, char info){
     }
 }
 
-
-
-void inorder(addressNode node){
-    if(node!=NULL){
-        inorder(node->leftSon);
-        printNode(node);
-        inorder(node->rightSon);
-    }
-}
-
-void preorder(addressNode node){
-	if(node!=NULL){
-		preorder(node->leftSon);
-		preorder(node->rightSon);
-		printNode(node);
-	}
-}
-
-void printNode(addressNode node){
-    printf((node->info==0 ? "(NULL)" : "%c "), node->info);
-}
-
-addressNode searchData(addressNode node, char info){
-    if(node->info==toupper(info)){
-        return node;
-    }
-
-    if(node==NULL){
-        return node;
-    }
-
-    addressNode result=searchData(node->leftSon, info);
-
-    if(result!=NULL){
-        return result;
-    }
-
-    result=searchData(node->rightSon, info);
-    return result;
-}
-
-
 bool isNodeEmpty(addressNode node){
     return node->info==0;
 }
@@ -106,10 +64,10 @@ int Theight(addressNode root){
     int leftSon = Theight(root->leftSon);
     int rightSon = Theight(root->rightSon);
 
-    return leftSon > rightSon ? (leftSon + 1) : (rightSon + 1);
+    return leftSon>rightSon? (leftSon + 1) : (rightSon + 1);
 }
 
-void createMorseTree(Tree *tree){
+void buildTmorse(Tree *tree){
     //  . = left Son 
     //  - = right Son 
 
@@ -168,7 +126,7 @@ void createMorseTree(Tree *tree){
     insertSon(tree->root->leftSon->rightSon->leftSon->leftSon->rightSon, LEFTSON, ' ');
 }
 
-char *createCodeChar(Tree Tmorse, char cod){
+char *createcode(Tree Tmorse, char cod){
     addressNode searchResult = searchData(Tmorse.root, cod);
     addressNode x=NULL;
     int height=Theight(Tmorse.root);
@@ -199,13 +157,17 @@ char *createCodeChar(Tree Tmorse, char cod){
     return returned;
 }
 
+void printNode(addressNode node){
+    printf((node->info==0 ? "(NULL)" : "%c "), node->info);
+}
+
 void CodeStr(Tree Tmorse, char *cods){
     int length = strlen(cods);
     int i;
 
     printf("%s : ", cods);
     for (i=0; i<length; i++){
-        printf("%s ", createCodeChar(Tmorse, cods[i]));
+        printf("%s ", createcode(Tmorse, cods[i]));
     }
     printf("\nd");
 }
@@ -227,7 +189,7 @@ char convertMorse(Tree Tmorse, char *morse){
     return y->info;
 }
 
-void convertMorseString(Tree Tmorse, char *m){
+void conMorseStrg(Tree Tmorse, char *m){
     char fill[6];
     int length = strlen(m);
     int i, j = 0;
@@ -250,6 +212,42 @@ void convertMorseString(Tree Tmorse, char *m){
     }
 }
 
+void preorder(addressNode node){
+	if(node!=NULL){
+		preorder(node->leftSon);
+		preorder(node->rightSon);
+		printNode(node);
+	}
+}
+
+void inorder(addressNode node){
+    if(node!=NULL){
+        inorder(node->leftSon);
+        printNode(node);
+        inorder(node->rightSon);
+    }
+}
+
+addressNode searchData(addressNode node, char info){
+    if(node->info==toupper(info)){
+        return node;
+    }
+
+    if(node==NULL){
+        return node;
+    }
+
+    addressNode result=searchData(node->leftSon, info);
+
+    if(result!=NULL){
+        return result;
+    }
+
+    result=searchData(node->rightSon, info);
+    return result;
+}
+
+
 void convertFile(Tree Tmorse, char *read, char *write){
     FILE *fp_read, *fp_write;
     char line[150];
@@ -264,7 +262,7 @@ void convertFile(Tree Tmorse, char *read, char *write){
         x=strlen(line);
 
         for(i=0; i<x; i++){
-            fprintf(fp_write, "%s ", createCodeChar(Tmorse, line[i]));
+            fprintf(fp_write, "%s ", createcode(Tmorse, line[i]));
         }
 
         fprintf(fp_write, "\nd");
