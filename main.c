@@ -1,21 +1,23 @@
 #include "tree.h"
 #include <stdio.h>
 
-int main(int argc, char const *argv[]){
+int main(int argc, char const *argv[])
+{
     Tree morse = createTree();
     char temp[150], src[150], dest[150];
-    buildTmorse(&morse);
+    createMorseTree(&morse);
 
-    printf("Tree Preorder : ");
-    preorder(morse.root);
+    printf("Morse Tree Inorder : ");
+    inorder(morse.root);
 
-    printf("\nPlease choose the desired function : \n1. Text to Morse\n2. Morse to Text\n3. Text File to Morse\n4. Exit\n");
+    printf("\nPlease choose the desired function : \n1. Text to Morse\n2. Morse to Text\n3. Text File to Morse\n4. Exit\nd");
     printf("Your option : ");
 
     int choice;
     scanf("%d", &choice);
 
-    switch (choice){
+    switch (choice)
+    {
     case 1:
         printf("Enter the text, max 150 char : ");
         scanf(" %[^\n]", temp);
@@ -24,7 +26,7 @@ int main(int argc, char const *argv[]){
         break;
 
     case 2:
-        printf("Input the morse code divided by space, max 150 char : ");
+        printf("Input the morse cod divided by space, max 150 char : ");
         scanf(" %[^\n]", temp);
 
         conMorseStrg(morse, temp);
