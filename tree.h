@@ -39,10 +39,10 @@ bool isNodeRoot(addressNode node);
 
 //Others
 
-int treeHeight(addressNode root);
+int Theight(addressNode root);
 void createMorseTree(Tree *tree);
-char *createCodeChar(Tree morseTree, char cod);
-void createCodeString(Tree morseTree, char *cods);
-char convertMorse(Tree morseTree, char *morse);
-void convertMorseString(Tree morseTree, char *morses);
-void convertFileToMorse(Tree morseTree, char *src, char *dest);
+char *createCodeChar(Tree Tmorse, char cod);
+void CodeStr(Tree Tmorse, char *cods);
+char convertMorse(Tree Tmorse, char *morse);
+void convertMorseString(Tree Tmorse, char *m);
+void convertFile(Tree Tmorse, char *src, char *dest);

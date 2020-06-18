@@ -20,7 +20,7 @@ int main(int argc, char const *argv[]){
         printf("Enter the text, max 150 char : ");
         scanf(" %[^\n]", temp);
 
-        createCodeString(morse, temp);
+        CodeStr(morse, temp);
         break;
 
     case 2:
@@ -37,7 +37,7 @@ int main(int argc, char const *argv[]){
         printf("Please input the name of the destination file : ");
         scanf("%s", dest);
 
-        convertFileToMorse(morse, src, dest);
+        convertFile(morse, src, dest);
         break;
 
     default:

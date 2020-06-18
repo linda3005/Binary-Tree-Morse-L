@@ -98,13 +98,13 @@ bool isNodeRoot(addressNode node){
 }
 
 
-int treeHeight(addressNode root){
+int Theight(addressNode root){
     if(root==NULL){
         return 0;
     }
 
-    int leftSon = treeHeight(root->leftSon);
-    int rightSon = treeHeight(root->rightSon);
+    int leftSon = Theight(root->leftSon);
+    int rightSon = Theight(root->rightSon);
 
     return leftSon > rightSon ? (leftSon + 1) : (rightSon + 1);
 }
@@ -168,10 +168,10 @@ void createMorseTree(Tree *tree){
     insertSon(tree->root->leftSon->rightSon->leftSon->leftSon->rightSon, LEFTSON, ' ');
 }
 
-char *createCodeChar(Tree morseTree, char cod){
-    addressNode searchResult = searchData(morseTree.root, cod);
+char *createCodeChar(Tree Tmorse, char cod){
+    addressNode searchResult = searchData(Tmorse.root, cod);
     addressNode x=NULL;
-    int height=treeHeight(morseTree.root);
+    int height=Theight(Tmorse.root);
     char *strge=(char *)malloc(sizeof(char) * height);
     int j=0;
 
@@ -199,19 +199,19 @@ char *createCodeChar(Tree morseTree, char cod){
     return returned;
 }
 
-void createCodeString(Tree morseTree, char *cods){
+void CodeStr(Tree Tmorse, char *cods){
     int length = strlen(cods);
     int i;
 
     printf("%s : ", cods);
     for (i=0; i<length; i++){
-        printf("%s ", createCodeChar(morseTree, cods[i]));
+        printf("%s ", createCodeChar(Tmorse, cods[i]));
     }
     printf("\nd");
 }
 
-char convertMorse(Tree morseTree, char *morse){
-    addressNode y=morseTree.root;
+char convertMorse(Tree Tmorse, char *morse){
+    addressNode y=Tmorse.root;
     int length=strlen(morse);
     int i;
 
@@ -227,32 +227,32 @@ char convertMorse(Tree morseTree, char *morse){
     return y->info;
 }
 
-void convertMorseString(Tree morseTree, char *morses){
+void convertMorseString(Tree Tmorse, char *m){
     char fill[6];
-    int length = strlen(morses);
+    int length = strlen(m);
     int i, j = 0;
 
     for(i=0; i<length; i++){
-        if(morses[i]== ' '){
-            printf("%c", convertMorse(morseTree, fill));
+        if(m[i]== ' '){
+            printf("%c", convertMorse(Tmorse, fill));
             j=0;
 
             memset(fill, 0, sizeof(fill));
         }
-        else if(morses[i]!= ' '){
-            fill[j]=morses[i];
+        else if(m[i]!= ' '){
+            fill[j]=m[i];
             j++;
 
             if(i==length-1){
-                printf("%c", convertMorse(morseTree, fill));
+                printf("%c", convertMorse(Tmorse, fill));
             }
         }
     }
 }
 
-void convertFileToMorse(Tree morseTree, char *read, char *write){
+void convertFile(Tree Tmorse, char *read, char *write){
     FILE *fp_read, *fp_write;
-    char line[100];
+    char line[150];
     int i, x;
 
     fp_read=fopen(read, "r");
@@ -260,11 +260,11 @@ void convertFileToMorse(Tree morseTree, char *read, char *write){
     if (fp_read==NULL || fp_write==NULL){
         return;
     }
-    while(fgets(line, 100, fp_read)!= NULL){
+    while(fgets(line, 150, fp_read)!= NULL){
         x=strlen(line);
 
         for(i=0; i<x; i++){
-            fprintf(fp_write, "%s ", createCodeChar(morseTree, line[i]));
+            fprintf(fp_write, "%s ", createCodeChar(Tmorse, line[i]));
         }
 
         fprintf(fp_write, "\nd");
