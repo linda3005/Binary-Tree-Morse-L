@@ -29,11 +29,6 @@ bool isNodeEmpty(addressNode node);
 bool isNodeLeaf(addressNode node);
 bool isNodeRoot(addressNode node);
 
-
-
-addressNode searchData(addressNode node, char info);
-
-
 //Others
 
 int Theight(addressNode root);
@@ -45,4 +40,5 @@ char convertMorse(Tree Tmorse, char *morse);
 void conMorseStrg(Tree Tmorse, char *m);
 void preorder(addressNode node);
 void inorder(addressNode node);
+addressNode searchData(addressNode node, char info);
 void convertFile(Tree Tmorse, char *src, char *dest);
